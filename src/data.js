@@ -75,7 +75,7 @@ window.data = {
                 counter = counter + 1;
             }
         });
-        return Math.round((counter / 151) * 100) + "%";
+        return counter;
     }
 
 }

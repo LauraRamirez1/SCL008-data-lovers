@@ -18,6 +18,20 @@ const pokemonData = {
                 "Fire"
             ]
         },
+        {
+            "id": 5,
+            "name": "Charmeleon",
+            "type": [
+                "Fire"
+            ]
+        },
+        {
+            "id": 37,
+            "name": "Vulpix",
+            "type": [
+                "Fire"
+            ]
+        },
     ],
 }
 describe('data', () => {
@@ -33,7 +47,7 @@ describe('data', () => {
             assert.equal(typeof window.data.sortData, 'function');
         });
         it('debería retornar arreglo organizados alfabetico desendente', () => {
-            assert.deepEqual(window.data.sortData(pokemonData.pokemon, "desc", "name"), [{ id: 4, name: 'Charmander', type: ['Fire'] }, { id: 1, name: 'Bulbasaur', type: ['Grass', 'Poison'] }]);
+            assert.deepEqual(window.data.sortData(pokemonData.pokemon, "desc", "name"), [{ id: 37, name: 'Vulpix', type: ['Fire'] }, { id: 5, name: 'Charmeleon', type: ['Fire'] }, { id: 4, name: 'Charmander', type: ['Fire'] }, { id: 1, name: 'Bulbasaur', type: ['Grass', 'Poison'] }]);
         });
 
     });
@@ -48,11 +62,25 @@ describe('data', () => {
             assert.isArray(pokemonData.pokemon);
         });
         it('debería retornar arreglo con objetos con tipo Fire', () => {
-            assert.deepEqual(window.data.filterData(pokemonData.pokemon, 'Fire'), [{ id: 4, name: 'Charmander', type: ['Fire'] }]);
+            assert.deepEqual(window.data.filterData(pokemonData.pokemon, 'Fire'), [{ id: 37, name: 'Vulpix', type: ['Fire'] }, { id: 5, name: 'Charmeleon', type: ['Fire'] }, { id: 4, name: 'Charmander', type: ['Fire'] }]);
         });
         it('debería retornar arreglo con objetos con tipo Grass', () => {
             assert.deepEqual(window.data.filterData(pokemonData.pokemon, 'Grass'), [{ id: 1, name: 'Bulbasaur', type: ['Grass', 'Poison'] }]);
         });
     });
-});
 
+    describe('data.computeStats', () => {
+
+        it('deberia ser una función', () => {
+            assert.equal(typeof window.data.computeStats, 'function');
+        });
+
+        it('debería retornar 2% con objetos con tipo Fire', () => {
+            assert.deepEqual(window.data.computeStats(pokemonData.pokemon, "Fire"), "2%");
+        });
+
+        it('debería retornar 1% con objetos con tipo Poison', () => {
+            astsert.deepEqual(window.data.computeStats(pokemonData.pokemon, "Poison"), "1%");
+        });
+    });
+});
